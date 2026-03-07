@@ -1,0 +1,55 @@
+version: 2
+
+sources:
+  - name: raw
+    database: dbtproject-487817
+    schema: raw_data
+
+    freshness:
+      warn_after: {count: 24, period: hour}
+      error_after: {count: 48, period: hour}
+
+    tables:
+      - name: trips_raw
+        description: Raw trips transactional table
+        columns:
+          - name: trip_id
+            tests:
+              - not_null
+              - unique
+
+      - name: drivers_raw
+        description: Raw drivers table
+        columns:
+          - name: driver_id
+            tests:
+              - not_null
+              - unique
+
+      - name: riders_raw
+        columns:
+          - name: rider_id
+            tests:
+              - not_null
+              - unique
+
+      - name: payments_raw
+        columns:
+          - name: payment_id
+            tests:
+              - not_null
+              - unique
+
+      - name: cities_raw
+        columns:
+          - name: city_id
+            tests:
+              - not_null
+              - unique
+
+      - name: driver_status_events_raw
+        columns:
+          - name: event_id
+            tests:
+              - not_null
+              - unique
