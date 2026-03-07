@@ -1,0 +1,153 @@
+version: 2
+
+models:
+
+  - name: cities_stg
+    description: >
+      Staging table for city-level information.
+      Cleans and formats raw city data for use in downstream models.
+    config:
+      tags: ["staging"]
+    meta:
+      owner: analytics_team
+    columns:
+      - name: city_id
+        description: Unique identifier for each city.
+      - name: city_name
+        description: Name of the city.
+      - name: country
+        description: Country where the city is located.
+      - name: launch_date
+        description: Date the city was launched or became operational.
+
+  - name: driver_status_events_stg
+    description: >
+      Staging table for driver status events.
+      Cleans and standardizes raw event data from the driver status stream.
+    config:
+      tags: ["staging"]
+    meta:
+      owner: operations_team
+    columns:
+      - name: event_id
+        description: Unique identifier for each driver status event.
+      - name: driver_id
+        description: Identifier of the driver associated with the event.
+      - name: status
+        description: Driver status (e.g., online, offline, busy).
+      - name: event_timestamp
+        description: Timestamp when the status change occurred.
+
+  - name: drivers_stg
+    description: >
+      Staging table for driver data.
+      Cleans and formats raw driver information including onboarding, status, and ratings.
+    config:
+      tags: ["staging"]
+    meta:
+      owner: operations_team
+    columns:
+      - name: driver_id
+        description: Unique identifier for each driver.
+      - name: onboarding_date
+        description: Date the driver joined the platform.
+      - name: driver_status
+        description: Current operational status of the driver.
+      - name: city_id
+        description: Identifier for the city where the driver operates.
+      - name: vehicle_id
+        description: Identifier for the vehicle assigned to the driver.
+      - name: rating
+        description: Numeric rating of the driver.
+      - name: created_at
+        description: Timestamp when the driver record was created.
+      - name: updated_at
+        description: Timestamp when the driver record was last updated.
+
+  - name: payments_stg
+    description: >
+      Staging table for payments data.
+      Standardizes and formats payment records including amount, fee, and provider.
+    config:
+      tags: ["staging"]
+    meta:
+      owner: finance_team
+    columns:
+      - name: payment_id
+        description: Unique identifier for each payment.
+      - name: trip_id
+        description: Trip associated with the payment.
+      - name: payment_status
+        description: Status of the payment (e.g., completed, failed).
+      - name: payment_provider
+        description: Payment provider or gateway used.
+      - name: amount
+        description: Payment amount collected.
+      - name: fee
+        description: Payment processing fee.
+      - name: currency
+        description: Currency of the payment.
+      - name: created_at
+        description: Timestamp when the payment record was created.
+
+  - name: riders_stg
+    description: >
+      Staging table for rider data.
+      Cleans and standardizes raw rider information including signup details and referrals.
+    config:
+      tags: ["staging"]
+    meta:
+      owner: analytics_team
+    columns:
+      - name: rider_id
+        description: Unique identifier for each rider.
+      - name: signup_date
+        description: Date the rider signed up.
+      - name: country
+        description: Country of the rider.
+      - name: referral_code
+        description: Code used for referral tracking.
+      - name: created_at
+        description: Timestamp when the rider record was created.
+
+  - name: trips_stg
+    description: >
+      Staging table for trip-level data.
+      Cleans, casts, and standardizes raw trip data including timestamps, fares, and trip details.
+    config:
+      tags: ["staging"]
+    meta:
+      owner: operations_team
+    columns:
+      - name: trip_id
+        description: Unique identifier for each trip.
+      - name: rider_id
+        description: Identifier of the rider who booked the trip.
+      - name: driver_id
+        description: Identifier of the driver who fulfilled the trip.
+      - name: vehicle_id
+        description: Vehicle used for the trip.
+      - name: city_id
+        description: City where the trip occurred.
+      - name: requested_at
+        description: Timestamp when the trip was requested.
+      - name: pickup_at
+        description: Timestamp when the trip started.
+      - name: dropoff_at
+        description: Timestamp when the trip ended.
+      - name: status
+        description: Status of the trip (e.g., completed, canceled).
+      - name: estimated_fare
+        description: Estimated fare for the trip.
+      - name: actual_fare
+        description: Actual fare collected for the trip.
+      - name: surge_multiplier
+        description: Surge pricing multiplier applied to the trip fare.
+      - name: payment_method
+        description: Payment method used for the trip.
+      - name: is_corporate
+        description: Flag indicating if the trip is a corporate booking.
+      - name: created_at
+        description: Timestamp when the trip record was created.
+      - name: updated_at
+        description: Timestamp when the trip record was last updated.

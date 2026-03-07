@@ -1,0 +1,128 @@
+version: 2
+
+models:
+
+  - name: driver_metrics_int
+    description: >
+      Intermediate aggregation calculating lifetime trip counts for each driver.
+      Used for building driver performance metrics in downstream models.
+
+    config:
+      tags: ["operations"]
+
+    meta:
+      owner: analytics_team
+
+    columns:
+
+      - name: driver_id
+        description: Unique identifier for each driver.
+
+      - name: driver_lifetime_trips
+        description: Total number of trips completed by the driver.
+
+
+  - name: driver_status_events_int
+    description: >
+      Processed driver activity events derived from the driver status event stream.
+      Tracks driver availability and operational state changes.
+
+    config:
+      tags: ["operations"]
+
+    meta:
+      owner: operations_team
+
+
+  - name: fraud_indicators_int
+    description: >
+      Intermediate model generating fraud risk indicators for trips.
+      Used to detect suspicious payment or pricing behavior.
+
+    config:
+      tags: ["fraud"]
+
+    meta:
+      owner: risk_team
+
+    columns:
+
+      - name: trip_id
+        description: Unique identifier for each trip.
+
+      - name: failed_payment_on_completed_trip
+        description: Flag indicating a payment failed even though the trip was marked completed.
+
+      - name: extreme_surge_multiplier
+        description: Indicator showing if the surge multiplier exceeded a high-risk threshold.
+
+      - name: duplicate_trip_payments
+        description: Flag indicating multiple payment attempts for the same trip.
+
+
+  - name: payment_metrics_int
+    description: >
+      Aggregated payment metrics calculated per trip.
+      Used to derive financial performance metrics in the trips fact table.
+
+    config:
+      tags: ["finance"]
+
+    meta:
+      owner: finance_team
+
+    columns:
+
+      - name: trip_id
+        description: Unique identifier for the trip associated with the payment.
+
+      - name: gross_revenue
+        description: Total payment amount collected for the trip.
+
+      - name: processing_fee
+        description: Total payment processing fees deducted from the transaction.
+
+      - name: net_revenue
+        description: Net revenue retained by the platform after processing fees.
+
+
+  - name: rider_metrics_int
+    description: >
+      Intermediate model calculating rider lifetime value metrics.
+
+    config:
+      tags: ["finance"]
+
+    meta:
+      owner: analytics_team
+
+    columns:
+
+      - name: rider_id
+        description: Unique identifier for each rider.
+
+      - name: rider_lifetime_value
+        description: Total revenue generated from the rider across all trips.
+
+
+  - name: trips_int
+    description: >
+      Intermediate transformation of trip-level data.
+      Calculates derived trip metrics and categorizes trip types.
+
+    config:
+      tags: ["operations"]
+
+    meta:
+      owner: analytics_team
+
+    columns:
+
+      - name: trip_id
+        description: Unique identifier for the trip.
+
+      - name: trip_duration_minutes
+        description: Calculated duration of the trip in minutes.
+
+      - name: corporate_trip_flag
+        description: Indicates whether the trip was a corporate or personal booking.
