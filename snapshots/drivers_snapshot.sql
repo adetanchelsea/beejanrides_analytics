@@ -1,14 +1,14 @@
-{% snapshot drivers_snapshot %}
+-- {% snapshot drivers_snapshot %}
 
-{{
-config(
-target_schema='snapshots',
-unique_key='driver_id',
-strategy='timestamp',
-updated_at='updated_at'
-)
-}}
+-- {{
+-- config(
+-- target_schema='snapshots',
+-- unique_key='driver_id',
+-- strategy='timestamp',
+-- updated_at='updated_at'
+-- )
+-- }}
 
-select * from {{ ref('drivers_stg') }}
+-- select * from {{ ref('drivers_stg') }}
 
-{% endsnapshot %}
+-- {% endsnapshot %}
