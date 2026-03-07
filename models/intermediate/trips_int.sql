@@ -1,7 +1,8 @@
 select
+
 trip_id,
 
-timestamp_diff(dropoff_at,pickup_at,minute) as trip_duration_minutes,
+{{ calc_trip_duration('pickup_at','dropoff_at') }} as trip_duration_minutes,
 
 case
 when is_corporate = true then 'corporate'

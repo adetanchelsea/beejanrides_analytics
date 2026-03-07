@@ -2,11 +2,11 @@ select
 
 trip_id,
 
-sum(amount) gross_revenue,
-sum(fee) processing_fee,
+sum(amount) as gross_revenue,
+sum(fee) as processing_fee,
 
-sum(amount) - sum(fee) net_revenue
+{{ calc_net_revenue('amount','fee') }} as net_revenue
 
-from {{ ref('payments_stg') }}
+from {{ ref('stg_payments') }}
 
 group by trip_id
