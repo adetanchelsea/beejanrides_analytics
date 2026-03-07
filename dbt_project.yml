@@ -10,10 +10,9 @@ seed-paths: ["seeds"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
 
-clean-targets:         
+clean-targets:
+  - "target"
   - "dbt_packages"
 
 models:
   beejan_rides:
-    example:
-      +materialized: view
