@@ -1,0 +1,3 @@
+select *
+from {{ ref('trips_fact') }}
+where actual_fare < 0
