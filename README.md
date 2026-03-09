@@ -60,8 +60,6 @@ Supports:
 
 ### **Entity Relationship Diagram (ERD)**
 ![ERD](images/dbt-project-erd.png)  
-- Star schema with **fact_trips** at the center  
-- Dimensions: **dim_drivers, dim_riders, dim_cities**  
 
 ### **Data Lineage**
 ![Lineage](images/lineage.jpg)  
