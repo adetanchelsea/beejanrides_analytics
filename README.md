@@ -51,7 +51,7 @@ Supports:
 ## **Architecture & Data Flow**
 
 ### **Architecture Diagram**
-![Architecture Diagram](images/beejan.png)
+![Architecture Diagram](images/architecture.png)
 
 - **Raw Layer**: Ingested via Airbyte  
 - **Staging Layer**: Cleans & deduplicates raw tables  
