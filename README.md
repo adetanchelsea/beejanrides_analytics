@@ -2,7 +2,7 @@
 
 A production-grade analytics platform built for Beejan Rides, a UK mobility startup operating across five cities. This project transforms raw transactional data—such as rides, drivers, riders, payments, and city data—into clean, analytics-ready datasets, while ensuring the entire pipeline runs automatically, reliably, and without manual intervention.
 
-The platform evolves beyond a simple transformation pipeline by introducing orchestration using Apache Airflow, making it suitable for real-world production environments.
+The platform evolves beyond a simple transformation pipeline by introducing orchestration using Airflow, making it suitable for real-world production environments.
 
 ---
 ## Table of Contents
@@ -136,7 +136,7 @@ In the Airflow UI, DAG runs can be monitored through the Grid and Graph views, w
 - Debug failures in real time  
 - Monitor retries and execution duration  
 
-This ensures full visibility into pipeline health.
+    This ensures full visibility into pipeline health.
 
 5. Backfills
 Backfill runs demonstrate the ability to process historical data using Airflow’s backfill functionality. This ensures that missed pipeline runs or historical data gaps can be reliably recovered without manual intervention.
