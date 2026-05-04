@@ -1,0 +1,139 @@
+version: 2
+
+models:
+
+  - name: trips_fact
+    description: >
+      Fact table containing trip-level ride data used for operational and financial reporting.
+      Grain: one row per trip.
+
+    config:
+      tags: ["finance", "operations"]
+
+    meta:
+      owner: analytics_team
+
+    columns:
+
+      - name: trip_id
+        description: Unique identifier for each trip.
+
+      - name: driver_id
+        description: Identifier of the driver who completed the trip.
+
+      - name: rider_id
+        description: Identifier of the rider who requested the trip.
+
+      - name: city_id
+        description: Identifier of the city where the trip occurred.
+
+      - name: requested_at
+        description: Timestamp when the rider requested the trip.
+
+      - name: pickup_at
+        description: Timestamp when the driver picked up the rider.
+
+      - name: dropoff_at
+        description: Timestamp when the trip ended.
+
+      - name: trip_duration_minutes
+        description: Total duration of the trip in minutes.
+
+      - name: actual_fare
+        description: Total fare charged to the rider for the trip.
+
+      - name: surge_multiplier
+        description: Surge pricing multiplier applied to the trip.
+
+      - name: is_corporate
+        description: Indicates whether the trip was booked through a corporate account.
+
+      - name: net_revenue
+        description: Revenue retained by the platform after fees and deductions.
+
+      - name: failed_payment_on_completed_trip
+        description: Flag indicating a payment failure even though the trip was completed.
+
+      - name: extreme_surge_multiplier
+        description: Indicator showing whether the trip experienced an unusually high surge multiplier.
+
+
+  - name: drivers_dim
+    description: >
+      Dimension table containing driver profile and operational attributes.
+
+    config:
+      tags: ["operations"]
+
+    meta:
+      owner: operations_team
+
+    columns:
+
+      - name: driver_id
+        description: Unique identifier for each driver.
+
+      - name: onboarding_date
+        description: Date when the driver joined the platform.
+
+      - name: driver_status
+        description: Current operational status of the driver (active, inactive, suspended).
+
+      - name: city_id
+        description: Identifier of the city where the driver operates.
+
+      - name: vehicle_id
+        description: Identifier of the vehicle registered to the driver.
+
+      - name: rating
+        description: Average rating given to the driver by riders.
+
+
+  - name: riders_dim
+    description: >
+      Dimension table containing rider profile and demographic information.
+
+    config:
+      tags: ["operations"]
+
+    meta:
+      owner: operations_team
+
+    columns:
+
+      - name: rider_id
+        description: Unique identifier for each rider.
+
+      - name: signup_date
+        description: Date when the rider created their account.
+
+      - name: country
+        description: Country where the rider registered.
+
+      - name: referral_code
+        description: Referral code used when the rider signed up.
+
+
+  - name: cities_dim
+    description: >
+      Dimension table listing cities where the platform operates.
+
+    config:
+      tags: ["operations"]
+
+    meta:
+      owner: analytics_team
+
+    columns:
+
+      - name: city_id
+        description: Unique identifier for each city.
+
+      - name: city_name
+        description: Name of the city.
+
+      - name: country
+        description: Country where the city is located.
+
+      - name: launch_date
+        description: Date when the platform launched in that city.

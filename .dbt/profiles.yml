@@ -1,0 +1,10 @@
+beejan_rides:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: service-account
+      project: dbtproject-487817
+      dataset: dbt_dataset
+      keyfile: /opt/airflow/dags/beejanrides_analytics/dbt-key.json
+      threads: 4
